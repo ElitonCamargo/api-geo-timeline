@@ -3,7 +3,8 @@ import * as usuario from '../controllers/usuario';
 
 const rota = Router();
 
-rota.get('/usuario', usuario.getUsuarios);
-rota.get('/usuario/:id', usuario.buscarPorId);
+rota.post('/usuario',usuario.cadastrar);
+rota.get('/usuario', usuario.consultar);
+rota.get('/usuario/:id', usuario.consultarPorId);
 
 export default rota;

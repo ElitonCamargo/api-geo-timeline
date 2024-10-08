@@ -56,9 +56,32 @@ export const cadastrar = async (req: Request, res: Response)=>{
       const salt = await bcrypt.genSalt(5);
       const senhaCriptografada = await bcrypt.hash(senha, salt);
 
+      // Cadastrar o novo usuário
+      const novoUsuario = await prisma.usuario.create(
+        {
+          data: {
+            nome,
+            email,
+            data_nasc: new Date(data_nasc),
+            senha: senhaCriptografada  // Salvando a senha criptografada
+          }
+        }
+      );
+
+      // Retorna os dados do usuário sem a senha
+      novoUsuario.senha = "";
+      res.status(201).json({
+        result: true,
+        info: "Usuário cadastrado com sucesso",
+        data: novoUsuario
+      });
   }
   catch(error){
     console.error(error);
-    res.status(500).json({ error: 'Erro ao cadastrar usuários' });
+    res.status(500).json({
+      result: false,
+      info: "Erro ao cadastrar usuário",
+      data: null
+    });
   }
 }
