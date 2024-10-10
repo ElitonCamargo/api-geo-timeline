@@ -18,8 +18,9 @@ model Usuario {
   nome      String
   email     String   @unique
   senha     String
-  data_nasc    DateTime?
-  status       Boolean  @default(true)
+  data_nasc DateTime?
+  status    Boolean  @default(true)
+  sexo      String   @default("") 
   rotas     Rota[]
   seguidores Seguir[] @relation("seguidores")
   seguidos   Seguir[] @relation("seguidos")
