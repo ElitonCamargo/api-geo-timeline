@@ -2,19 +2,18 @@ import { Request, Response } from 'express';
 import bcrypt from 'bcryptjs';
 import prisma from '../config/database';
 import jwt from 'jsonwebtoken';
-
 // Definir a chave secreta (idealmente deve ser armazenada em uma variável de ambiente)
 const chaveSecretaJWT = process.env.JWT_SECRET || 'seu-segredo-seguro';
 
 export const cadastrar = async (req: Request, res: Response) => {
-  const { nome, email, senha, data_nasc } = req.body;  // Recebe os dados do corpo da requisição
+  const { nome, email, senha, data_nasc, sexo } = req.body;  // Recebe os dados do corpo da requisição
 
   // Validação básica
-  if (!nome || !email || !senha || !data_nasc) {
+  if (!nome || !email || !senha || !data_nasc || !sexo) {
     return res.status(400).json({
       result: false,
       data: null,
-      info: "Nome, email e senha são obrigatórios"
+      info: "Dados obrigatórios não informados"
     });
   }
 
@@ -41,7 +40,8 @@ export const cadastrar = async (req: Request, res: Response) => {
         nome,
         email,
         data_nasc: new Date(data_nasc),
-        senha: senhaCriptografada  // Salvando a senha criptografada
+        senha: senhaCriptografada, // Salvando a senha criptografada
+        sexo
       }
     });
     // Retorna os dados do usuário sem a senha
@@ -118,7 +118,6 @@ export const login = async (req: Request, res: Response) => {
 export const consultar = async (req: Request, res: Response) => {
   try {
     const { nome, email, data_nasc, sexo } = req.query;
-    console.log(nome, email, data_nasc, sexo );
     const whereCondicao: any = {}; // Inicializando um objeto para armazenar as condições
 
     // Adicionando condições de filtro se os parâmetros forem fornecidos
@@ -157,13 +156,13 @@ export const consultar = async (req: Request, res: Response) => {
 
     if (users.length > 0) {
       const usuarios = users.map(u=>u.senha = "");
-      res.status(200).json({
+      return res.status(200).json({
         result: true,
         data: users,
         info: "",
       });
     } else {
-      res.status(404).json({
+      return res.status(404).json({
         result: false,
         data: [],
         info: "Nenhum resultado encontrado para esta busca"
@@ -171,7 +170,13 @@ export const consultar = async (req: Request, res: Response) => {
     }
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: 'Erro ao buscar usuários' });
+    return res.status(500).json(
+      {
+        result: false,
+        data: [],
+        info: "Erro ao buscar usuários"
+      }
+    );
   }
 };
 
@@ -202,6 +207,33 @@ export const consultarPorEmail = async (req: Request, res: Response)=>{
   }
 }
 
+export const usuarioLogado = async (req: Request, res: Response)=>{
+  try{
+    const id = req.body.user_id??0;
+
+    const usuario = await prisma.usuario.findUnique(
+      {where:{id}}
+    );
+    if (usuario) {
+      usuario.senha = "";
+      res.status(200).json({
+        result: true,
+        data: usuario,
+        info: "",
+      });
+    } else {
+      res.status(404).json({
+        result: false,
+        data: null,
+        info: "Usuário não encontrado"
+      });
+    }
+  }
+  catch(error){
+    console.error(error);
+    res.status(500).json({ error: 'Erro ao buscar usuários' });
+  }
+}
 export const consultarPorId = async (req: Request, res: Response)=>{
   try{
     const _id = parseInt(req.params.id);

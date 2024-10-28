@@ -1,7 +1,14 @@
 import express from 'express';
+import { verificarConexaoBanco } from './middlewares/verificarConexao';
 import rotas_usuario from './routes/usuario';
+
 const app = express();
+
 app.use(express.json());
+
+// Middleware para verificar a conexão com o banco antes de todas as rotas
+app.use(verificarConexaoBanco);
+
 app.get('/', (req, res) => {
   res.send('API Geo-Timeline funcionando');
 });
