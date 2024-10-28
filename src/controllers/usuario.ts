@@ -46,17 +46,18 @@ export const cadastrar = async (req: Request, res: Response) => {
     });
     // Retorna os dados do usuário sem a senha
     novoUsuario.senha = "";
-    res.status(201).json({
+    return res.status(201).json({
       result: true,
-      message: "Usuário cadastrado com sucesso",
-      data: novoUsuario
+      data: novoUsuario,
+      info: "Usuário cadastrado com sucesso",
     });
 
   } catch (error) {
     console.error(error);
-    res.status(500).json({
+    return res.status(500).json({
       result: false,
-      message: "Erro ao cadastrar usuário"
+      data: null,
+      info: "Erro ao cadastrar usuário"
     });
   }
 };
@@ -110,7 +111,7 @@ export const login = async (req: Request, res: Response) => {
     return res.status(500).json({
       result: false,
       data: null,
-       error: 'Erro ao realizar o login'
+      error: 'Erro ao realizar o login'
     });
   }
 };
@@ -174,7 +175,7 @@ export const consultar = async (req: Request, res: Response) => {
       {
         result: false,
         data: [],
-        info: "Erro ao buscar usuários"
+        error: "Erro ao buscar usuários"
       }
     );
   }
@@ -188,13 +189,13 @@ export const consultarPorEmail = async (req: Request, res: Response)=>{
     );
     if (usuario) {
       usuario.senha = "";
-      res.status(200).json({
+      return res.status(200).json({
         result: true,
         data: usuario,
         info: "",
       });
     } else {
-      res.status(404).json({
+      return res.status(404).json({
         result: false,
         data: null,
         info: "Usuário não encontrado"
@@ -203,7 +204,11 @@ export const consultarPorEmail = async (req: Request, res: Response)=>{
   }
   catch(error){
     console.error(error);
-    res.status(500).json({ error: 'Erro ao buscar usuários' });
+    return res.status(500).json({
+      result: false,
+      data: null,
+      error: 'Erro interno de sistema ao buscar usuários' 
+    });
   }
 }
 
@@ -216,13 +221,13 @@ export const usuarioLogado = async (req: Request, res: Response)=>{
     );
     if (usuario) {
       usuario.senha = "";
-      res.status(200).json({
+      return res.status(200).json({
         result: true,
         data: usuario,
         info: "",
       });
     } else {
-      res.status(404).json({
+      return res.status(404).json({
         result: false,
         data: null,
         info: "Usuário não encontrado"
@@ -231,7 +236,12 @@ export const usuarioLogado = async (req: Request, res: Response)=>{
   }
   catch(error){
     console.error(error);
-    res.status(500).json({ error: 'Erro ao buscar usuários' });
+    return res.status(500).json({ 
+      result: false,
+      data: null,
+      error: 'Erro interno do servidor ao buscar usuários' 
+    });
+    
   }
 }
 export const consultarPorId = async (req: Request, res: Response)=>{
@@ -242,13 +252,13 @@ export const consultarPorId = async (req: Request, res: Response)=>{
     );
     if (usuario) {
       usuario.senha = "";
-      res.status(200).json({
+      return res.status(200).json({
         result: true,
         data: usuario,
         info: "",
       });
     } else {
-      res.status(404).json({
+      return res.status(404).json({
         result: false,
         data: null,
         info: "Usuário não encontrado"
@@ -257,7 +267,11 @@ export const consultarPorId = async (req: Request, res: Response)=>{
   }
   catch(error){
     console.error(error);
-    res.status(500).json({ error: 'Erro ao buscar usuários' });
+    return res.status(500).json({
+      result: false,
+      data: null,
+      error: 'Erro ao buscar usuários' 
+    });
   }
 }
 export const deletar = async (req: Request, res: Response)=>{
@@ -282,7 +296,11 @@ export const deletar = async (req: Request, res: Response)=>{
   }
   catch(error){
     console.error(error);
-    return res.status(500).json({ error: 'Erro ao deletar usuários' });
+    return res.status(500).json({ 
+      result: false,
+      data: null,
+      error: 'Erro ao deletar usuários' 
+    });
   }
 }
 
