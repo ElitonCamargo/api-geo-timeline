@@ -111,7 +111,7 @@ export const login = async (req: Request, res: Response) => {
     return res.status(500).json({
       result: false,
       data: null,
-      error: 'Erro ao realizar o login'
+      info: 'Erro ao realizar o login'
     });
   }
 };
@@ -175,7 +175,7 @@ export const consultar = async (req: Request, res: Response) => {
       {
         result: false,
         data: [],
-        error: "Erro ao buscar usuários"
+        info: "Erro ao buscar usuários"
       }
     );
   }
@@ -207,7 +207,7 @@ export const consultarPorEmail = async (req: Request, res: Response)=>{
     return res.status(500).json({
       result: false,
       data: null,
-      error: 'Erro interno de sistema ao buscar usuários' 
+      info: 'Erro interno de sistema ao buscar usuários' 
     });
   }
 }
@@ -239,7 +239,7 @@ export const usuarioLogado = async (req: Request, res: Response)=>{
     return res.status(500).json({ 
       result: false,
       data: null,
-      error: 'Erro interno do servidor ao buscar usuários' 
+      info: 'Erro interno do servidor ao buscar usuários' 
     });
     
   }
@@ -270,7 +270,7 @@ export const consultarPorId = async (req: Request, res: Response)=>{
     return res.status(500).json({
       result: false,
       data: null,
-      error: 'Erro ao buscar usuários' 
+      info: 'Erro ao buscar usuários' 
     });
   }
 }
@@ -299,7 +299,7 @@ export const deletar = async (req: Request, res: Response)=>{
     return res.status(500).json({ 
       result: false,
       data: null,
-      error: 'Erro ao deletar usuários' 
+      info: 'Erro ao deletar usuários' 
     });
   }
 }

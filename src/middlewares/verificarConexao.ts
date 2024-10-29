@@ -10,7 +10,7 @@ export const verificarConexaoBanco = async (req: Request, res: Response, next: N
     return res.status(500).json({
       result: false,
       data: null,
-      error: 'Não foi possível conectar ao banco de dados. Tente novamente mais tarde.'
+      info: 'Não foi possível conectar ao banco de dados. Tente novamente mais tarde.'
     });
   }
 };

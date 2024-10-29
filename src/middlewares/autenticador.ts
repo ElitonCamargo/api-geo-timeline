@@ -11,7 +11,7 @@ export const autenticador = (req: Request, res: Response, next: NextFunction) =>
     return res.status(498).json({
       result: false,
       data: null,
-      error: 'Token de autenticação não fornecido'
+      info: 'Token de autenticação não fornecido'
     });
   }
 
@@ -26,7 +26,7 @@ export const autenticador = (req: Request, res: Response, next: NextFunction) =>
     return res.status(498).json({
       result: false,
       data: null,
-      error: 'Login não autorizado'
+      info: 'Login não autorizado'
     });
   }
 };
