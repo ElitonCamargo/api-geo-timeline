@@ -1,6 +1,5 @@
 {
   "version": 2,
-  "buildCommand": "npm run build",
   "builds": [
     {
       "src": "/src/index.ts",
@@ -9,8 +8,8 @@
   ],
   "routes": [
     {
-      "src": "/(.*)",
-      "dest": "public/index.js"
+      "src": "(.*)",
+      "dest": "/src/index.ts"
     }
   ]
 }
