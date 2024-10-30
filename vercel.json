@@ -1,10 +1,16 @@
 {
   "version": 2,
   "buildCommand": "npm run build",
+  "builds": [
+    {
+      "src": "public/index.js",
+      "use": "@vercel/node"
+    }
+  ],
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "build/index.js"
+      "dest": "public/index.js"
     }
   ]
 }
