@@ -17,7 +17,7 @@ app.use('/', usuario_1.default); // Usando as rotas de usuário
 app.get('/', (req, res) => {
     res.send('API Geo-Timeline funcionando');
 });
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 80;
 app.listen(PORT, () => {
     console.log('Servidor rodando.', `Porta ${PORT} (http://localhost:${PORT})`);
 });
