@@ -5,6 +5,9 @@ node_modules
 # Ignorar diretório de build
 build
 
+# Ignorar diretório de public
+# public
+
 # Ignorar .env de configurações
 .env
 
