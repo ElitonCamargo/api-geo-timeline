@@ -2,7 +2,7 @@
   "name": "api-geo-timeline",
   "version": "1.0.0",
   "description": "- **App:** [repositório github](https://github.com/ElitonCamargo/app-geo-timeline).\r - **API:** [repositório github](https://github.com/ElitonCamargo/api-geo-timeline).",
-  "main": "build/index.js",
+  "main": "public/index.js",
   "scripts": {
     "dev": "nodemon src/index.ts",
     "build": "tsc",
