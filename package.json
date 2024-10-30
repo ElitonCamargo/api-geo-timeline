@@ -2,11 +2,11 @@
   "name": "api-geo-timeline",
   "version": "1.0.0",
   "description": "- **App:** [repositório github](https://github.com/ElitonCamargo/app-geo-timeline).\r - **API:** [repositório github](https://github.com/ElitonCamargo/api-geo-timeline).",
-  "main": "src/index.ts",
+  "main": "dist/index.js",
   "scripts": {
     "dev": "nodemon src/index.ts",
     "build": "tsc",
-    "start": "nodemon src/index.ts",
+    "start": "node .",
     "migrate:dev": "npx prisma migrate dev && npx prisma generate",
     "migrate:deploy": "npx prisma migrate deploy"
   },
