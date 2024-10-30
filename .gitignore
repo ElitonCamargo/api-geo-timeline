@@ -1,7 +1,12 @@
-node_modules
 # Keep environment variables out of version control
-dist
+# Ignorar diretório node_modules
+node_modules
 
+# Ignorar diretório de build
+build
+
+# Ignorar .env de configurações
 .env
 
+# Ignorar .git
 .git

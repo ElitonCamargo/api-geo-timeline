@@ -1,17 +1,15 @@
 {
   "version": 2,
-  "outputDirectory": ".",
   "builds": [
     {
       "src": "src/index.ts",
-      "use": "@vercel/node",
-      "config": { "includeFiles": ["prisma/schema.prisma"] }
+      "use": "@vercel/node"
     }
   ],
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "/dist/index.js"
+      "dest": "/build/index.js"
     }
   ]
 }
