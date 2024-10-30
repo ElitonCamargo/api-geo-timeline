@@ -4,7 +4,7 @@
   "outputDirectory": "public",
   "routes": [
     {
-      "src": "(.*)",
+      "src": "/(.*)",
       "dest": "build/index.js"
     }
   ]
