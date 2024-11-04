@@ -9,7 +9,7 @@ build
 # public
 
 # Ignorar .env de configurações
-.env
+# .env
 
 # Ignorar .git
 .git
